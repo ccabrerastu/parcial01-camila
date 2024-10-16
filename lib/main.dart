@@ -30,11 +30,11 @@ class _UniversidadPageState extends State<UniversidadPage> {
   bool isHovered = false;
   final PageController _pageController = PageController();
   int _currentPage = 0;
-
+  String _displayText = '';
+  String _imagePath = '';
   void _nextPage() {
     setState(() {
       if (_currentPage < 2) {
-
         _currentPage++;
       } else {
         _currentPage = 0;
@@ -52,7 +52,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
       if (_currentPage > 0) {
         _currentPage--;
       } else {
-        _currentPage = 2; 
+        _currentPage = 2;
       }
     });
     _pageController.animateToPage(
@@ -62,79 +62,155 @@ class _UniversidadPageState extends State<UniversidadPage> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-     return Scaffold(
-    appBar: PreferredSize(
-      preferredSize: const Size.fromHeight(150.0),
-      child: Column(
-        children: [
-          _buildHeader(context),
-          _buildNavBar(context),
-        ],
-      ),
-    ),
-    body: Column(
-      children: [
-        SizedBox(
-          height: 150, 
-          width: MediaQuery.of(context).size.width * 1,
-          child: Stack(
-            children: [
-              PageView.builder(
-                controller: _pageController,
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return Center( 
-                    child: Image.asset(
-                      index == 0
-                          ? 'assets/images/fondoranking.jpg'
-                          : index == 1
-                              ? 'assets/images/licencia.jpg'
-                              : 'assets/images/movilidad.jpg',
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                    ),
-                  );
-                },
-              ),
-              Positioned(
-                left: 10,
-                top: 100, 
-                child: GestureDetector(
-                  onTap: _previousPage,
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.grey,
-                    size: 30,
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 10,
-                top: 100, 
-                child: GestureDetector(
-                  onTap: _nextPage,
-                  child: const Icon(
-                    Icons.arrow_forward,
-                    color: Colors.grey,
-                    size: 30,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Container(
-            color: Colors.white, 
-          ),
-        ),
-      ],
-    ),
-  );
+  void _showAbout() {
+    setState(() {
+      _displayText =
+          'Somos una institución de derecho privado, con personería jurídica inscrita en Registros Públicos de Tacna con la Ficha N°1217 (Partida Electrónica N° 11005803) sin fines de lucro, con autonomía académica, económica, normativa, administrativa y de gobierno, que se rige por la Constitución Política del Perú, la Ley Universitaria N° 30220, su Ley de Creación N°24060, por su Estatuto y Reglamentos y NO DEPENDE DE NINGUNA OTRA PERSONA JURÍDICA O ENTE PROMOTOR.';
+      _imagePath = '';
+    });
   }
 
+  void _showLocation() {
+    setState(() {
+      _displayText =
+          'La Universidad Privada de Tacna está ubicada en la ciudad de Tacna y no cuenta con ninguna sede, filial, coordinadora u oficina descentralizada en ningún otro lugar del país.';
+    });
+  }
+
+  void _showSchedule() {
+    setState(() {
+      _displayText = '';
+      _imagePath = 'assets/images/calendario.jpg';
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(150.0),
+        child: Column(
+          children: [
+            _buildHeader(context),
+            _buildNavBar(context),
+          ],
+        ),
+      ),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 150,
+            width: MediaQuery.of(context).size.width * 1,
+            child: Stack(
+              children: [
+                PageView.builder(
+                  controller: _pageController,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return Center(
+                      child: Image.asset(
+                        index == 0
+                            ? 'assets/images/fondoranking.jpg'
+                            : index == 1
+                                ? 'assets/images/licencia.jpg'
+                                : 'assets/images/movilidad.jpg',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ),
+                    );
+                  },
+                ),
+                Positioned(
+                  left: 10,
+                  top: 100,
+                  child: GestureDetector(
+                    onTap: _previousPage,
+                    child: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.grey,
+                      size: 30,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 10,
+                  top: 100,
+                  child: GestureDetector(
+                    onTap: _nextPage,
+                    child: const Icon(
+                      Icons.arrow_forward,
+                      color: Colors.grey,
+                      size: 30,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Fila de botones
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildSquareButton('Nosotros', _showAbout),
+              _buildSquareButton('Ubicación', _showLocation),
+              _buildSquareButton('Cronograma', _showSchedule),
+            ],
+          ),
+          // Espacio para mostrar el texto o la imagen
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Text(
+                  _displayText,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 12),
+                ),
+                if (_imagePath
+                    .isNotEmpty) // Mostrar la imagen si la ruta no está vacía
+                  Container(
+                    margin: const EdgeInsets.only(top: 16.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Colors.black, width: 1), // Marco negro
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/calendario.JPG',
+                        fit: BoxFit.cover,
+                        width: 400,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  Widget _buildSquareButton(String text, VoidCallback onPressed) {
+    return SizedBox(
+      width: 120, // Ancho del botón cuadrado
+      height: 35, // Alto del botón cuadrado
+      child: TextButton(
+        onPressed: onPressed,
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.transparent, // Sin fondo
+          foregroundColor: Colors.black, // Color del texto
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero, // Bordes cuadrados
+          ),
+        ),
+        child: Text(text),
+      ),
+    );
+  }
   Widget _buildHeader(BuildContext context) {
     return Container(
       color: Colors.indigo[900],
@@ -318,9 +394,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
           children: [
             _buildUniversidadNavItem(context),
             _buildAdmisionNavItem(context),
-
-            _buildPreGradoNavItem(
-                context), 
+            _buildPreGradoNavItem(context),
             _buildServiciosNavItem(context),
             _buildOficinasNavItem(context),
           ],

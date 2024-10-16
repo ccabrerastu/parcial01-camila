@@ -99,7 +99,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
       body: Column(
         children: [
           SizedBox(
-            height: 150,
+            height: 110,
             width: MediaQuery.of(context).size.width * 1,
             child: Stack(
               children: [
@@ -134,7 +134,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
                 ),
                 Positioned(
                   right: 10,
-                  top: 100,
+                  top: 70,
                   child: GestureDetector(
                     onTap: _nextPage,
                     child: const Icon(
@@ -147,7 +147,6 @@ class _UniversidadPageState extends State<UniversidadPage> {
               ],
             ),
           ),
-          // Fila de botones
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -156,7 +155,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
               _buildSquareButton('Cronograma', _showSchedule),
             ],
           ),
-          // Espacio para mostrar el texto o la imagen
+
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -167,13 +166,12 @@ class _UniversidadPageState extends State<UniversidadPage> {
                   style: const TextStyle(fontSize: 12),
                 ),
                 if (_imagePath
-                    .isNotEmpty) // Mostrar la imagen si la ruta no está vacía
+                    .isNotEmpty) 
                   Container(
                     margin: const EdgeInsets.only(top: 16.0),
                     decoration: BoxDecoration(
                       border: Border.all(
-                          color: Colors.black, width: 1), // Marco negro
-                    ),
+                          color: Colors.black, width: 1),                    ),
                     child: Center(
                       child: Image.asset(
                         'assets/images/calendario.JPG',
@@ -196,15 +194,15 @@ class _UniversidadPageState extends State<UniversidadPage> {
   }
   Widget _buildSquareButton(String text, VoidCallback onPressed) {
     return SizedBox(
-      width: 120, // Ancho del botón cuadrado
-      height: 35, // Alto del botón cuadrado
+      width: 120, 
+      height: 35,
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          backgroundColor: Colors.transparent, // Sin fondo
-          foregroundColor: Colors.black, // Color del texto
+          backgroundColor: Colors.transparent, 
+          foregroundColor: Colors.black, 
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.zero, // Bordes cuadrados
+            borderRadius: BorderRadius.zero, 
           ),
         ),
         child: Text(text),

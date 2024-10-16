@@ -31,9 +31,9 @@ class _UniversidadPageState extends State<UniversidadPage> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
   final List<String> images = [
-    'assets/images/fondoranking.jpeg',
-    'assets/images/licencia.jpeg',
-    'assets/images/movilidad.jpeg'
+    'assets/images/fondoranking.jpg',
+    'assets/images/licencia.jpg',
+    'assets/images/movilidad.jpg'
   ];
   void _nextPage() {
     setState(() {

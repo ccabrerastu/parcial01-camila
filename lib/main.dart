@@ -122,7 +122,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
                 ),
                 Positioned(
                   left: 10,
-                  top: 100,
+                  top: 70,
                   child: GestureDetector(
                     onTap: _previousPage,
                     child: const Icon(

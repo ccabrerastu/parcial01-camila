@@ -84,7 +84,9 @@ class _UniversidadPageState extends State<UniversidadPage> {
                 itemCount: 3,
                 itemBuilder: (context, index) {
                   return Container(
-                    height: 100, // Ajusta esta altura según sea necesario
+                     width: MediaQuery.of(context).size.width * 0.5,
+                    height:250, // Ajusta esta altura según sea necesario
+                    alignment: Alignment.center, 
                     child: Image.asset(
                       index == 0
                           ? 'assets/images/fondoranking.jpg'
@@ -104,7 +106,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
                   onTap: _previousPage,
                   child: const Icon(
                     Icons.arrow_back,
-                    color: Colors.black,
+                    color: Colors.grey,
                     size: 30,
                   ),
                 ),
@@ -116,7 +118,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
                   onTap: _nextPage,
                   child: const Icon(
                     Icons.arrow_forward,
-                    color: Colors.black,
+                    color: Colors.grey,
                     size: 30,
                   ),
                 ),

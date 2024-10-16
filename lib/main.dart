@@ -31,16 +31,16 @@ class _UniversidadPageState extends State<UniversidadPage> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
   final List<String> images = [
-    'assets/images/fondoranking.JPG',
-    'assets/images/licencia.jpg',
-    'assets/images/movilidad.jpg'
+    'assets/images/fondoranking.jpeg',
+    'assets/images/licencia.jpeg',
+    'assets/images/movilidad.jpeg'
   ];
   void _nextPage() {
     setState(() {
       if (_currentPage < images.length - 1) {
         _currentPage++;
       } else {
-        _currentPage = 0; 
+        _currentPage = 0;
       }
     });
     _pageController.animateToPage(
@@ -49,12 +49,14 @@ class _UniversidadPageState extends State<UniversidadPage> {
       curve: Curves.easeIn,
     );
   }
+
   void _previousPage() {
     setState(() {
       if (_currentPage > 0) {
         _currentPage--;
       } else {
-        _currentPage = images.length - 1; // Va al final cuando esté en el inicio
+        _currentPage =
+            images.length - 1; // Va al final cuando esté en el inicio
       }
     });
     _pageController.animateToPage(
@@ -63,6 +65,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
       curve: Curves.easeIn,
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -199,6 +202,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
       ),
     );
   }
+
   Widget _buildAdmisionNavItem(BuildContext context) {
     return MouseRegion(
       onEnter: (_) => setState(() => isHovered = true),
@@ -246,6 +250,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
       ),
     );
   }
+
   Widget _buildOficinasNavItem(BuildContext context) {
     return MouseRegion(
       onEnter: (_) => setState(() => isHovered = true),
@@ -304,10 +309,10 @@ class _UniversidadPageState extends State<UniversidadPage> {
           children: [
             _buildUniversidadNavItem(context),
             _buildAdmisionNavItem(context),
-            
+
             _buildPreGradoNavItem(
                 context), // Opción "PRE-GRADO" con menú desplegable
-           _buildServiciosNavItem(context),
+            _buildServiciosNavItem(context),
             _buildOficinasNavItem(context),
           ],
         ),

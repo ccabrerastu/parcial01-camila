@@ -32,6 +32,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
   int _currentPage = 0;
   String _displayText = '';
   String _imagePath = '';
+  String _imageLocation = '';
   void _nextPage() {
     setState(() {
       if (_currentPage < 2) {
@@ -64,6 +65,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
 
   void _showAbout() {
     setState(() {
+      _imagePath = '';
       _displayText =
           'Somos una institución de derecho privado, con personería jurídica inscrita en Registros Públicos de Tacna con la Ficha N°1217 (Partida Electrónica N° 11005803) sin fines de lucro, con autonomía académica, económica, normativa, administrativa y de gobierno, que se rige por la Constitución Política del Perú, la Ley Universitaria N° 30220, su Ley de Creación N°24060, por su Estatuto y Reglamentos y NO DEPENDE DE NINGUNA OTRA PERSONA JURÍDICA O ENTE PROMOTOR.';
       _imagePath = '';
@@ -72,8 +74,10 @@ class _UniversidadPageState extends State<UniversidadPage> {
 
   void _showLocation() {
     setState(() {
+      _imagePath = '';
       _displayText =
           'La Universidad Privada de Tacna está ubicada en la ciudad de Tacna y no cuenta con ninguna sede, filial, coordinadora u oficina descentralizada en ningún otro lugar del país.';
+      _imageLocation = 'assets/images/mapa.JPG';
     });
   }
 
@@ -155,7 +159,6 @@ class _UniversidadPageState extends State<UniversidadPage> {
               _buildSquareButton('Cronograma', _showSchedule),
             ],
           ),
-
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -165,13 +168,12 @@ class _UniversidadPageState extends State<UniversidadPage> {
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 12),
                 ),
-                if (_imagePath
-                    .isNotEmpty) 
+                if (_imagePath.isNotEmpty)
                   Container(
                     margin: const EdgeInsets.only(top: 16.0),
                     decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.black, width: 1),                    ),
+                      border: Border.all(color: Colors.black, width: 1),
+                    ),
                     child: Center(
                       child: Image.asset(
                         'assets/images/calendario.JPG',
@@ -192,23 +194,25 @@ class _UniversidadPageState extends State<UniversidadPage> {
       ),
     );
   }
+
   Widget _buildSquareButton(String text, VoidCallback onPressed) {
     return SizedBox(
-      width: 120, 
+      width: 120,
       height: 35,
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          backgroundColor: Colors.transparent, 
-          foregroundColor: Colors.black, 
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.black,
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.zero, 
+            borderRadius: BorderRadius.zero,
           ),
         ),
         child: Text(text),
       ),
     );
   }
+
   Widget _buildHeader(BuildContext context) {
     return Container(
       color: Colors.indigo[900],

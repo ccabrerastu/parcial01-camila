@@ -75,7 +75,56 @@ class _UniversidadPageState extends State<UniversidadPage> {
       ),
     );
   }
-Widget _buildOficinasNavItem(BuildContext context) {
+
+  Widget _buildUniversidadNavItem(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => isHovered = true),
+      onExit: (_) => setState(() => isHovered = false),
+      child: PopupMenuButton<String>(
+        onSelected: (value) {},
+        itemBuilder: (BuildContext context) {
+          return [
+            const PopupMenuItem(
+              value: 'ingenieria',
+              child: Text('Reseña'),
+            ),
+            const PopupMenuItem(
+              value: 'medicina',
+              child: Text('Mision - Vision'),
+            ),
+            const PopupMenuItem(
+              value: 'arquitectura',
+              child: Text('Autoridades'),
+            ),
+            const PopupMenuItem(
+              value: 'humanidades',
+              child: Text('Calendario Academico'),
+            ),
+            const PopupMenuItem(
+              value: 'humanidades',
+              child: Text('Derechos Academicos'),
+            ),
+          ];
+        },
+        child: Container(
+          padding: const EdgeInsets.all(5.0),
+          decoration: BoxDecoration(
+            color:
+                isHovered ? Colors.white.withOpacity(0.2) : Colors.transparent,
+          ),
+          child: const Text(
+            'UNIVERSIDAD',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOficinasNavItem(BuildContext context) {
     return MouseRegion(
       onEnter: (_) => setState(() => isHovered = true),
       onExit: (_) => setState(() => isHovered = false),
@@ -121,7 +170,8 @@ Widget _buildOficinasNavItem(BuildContext context) {
         ),
       ),
     );
-}
+  }
+
   Widget _buildNavBar(BuildContext context) {
     return Container(
       color: Colors.blue[800],
@@ -130,7 +180,7 @@ Widget _buildOficinasNavItem(BuildContext context) {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildNavItem('UNIVERSIDAD', context),
+            _buildUniversidadNavItem(context),
             _buildNavItem('ADMISIÓN', context),
             _buildPreGradoNavItem(
                 context), // Opción "PRE-GRADO" con menú desplegable
@@ -151,7 +201,6 @@ Widget _buildOficinasNavItem(BuildContext context) {
       ),
     );
   }
-
 
   Widget _buildPreGradoNavItem(BuildContext context) {
     return MouseRegion(

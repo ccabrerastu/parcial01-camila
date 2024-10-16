@@ -123,7 +123,53 @@ class _UniversidadPageState extends State<UniversidadPage> {
       ),
     );
   }
-
+  Widget _buildAdmisionNavItem(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => isHovered = true),
+      onExit: (_) => setState(() => isHovered = false),
+      child: PopupMenuButton<String>(
+        onSelected: (value) {},
+        itemBuilder: (BuildContext context) {
+          return [
+            const PopupMenuItem(
+              value: 'ingenieria',
+              child: Text('Cronograma'),
+            ),
+            const PopupMenuItem(
+              value: 'medicina',
+              child: Text('Prospecto'),
+            ),
+            const PopupMenuItem(
+              value: 'arquitectura',
+              child: Text('Resultados'),
+            ),
+            const PopupMenuItem(
+              value: 'humanidades',
+              child: Text('Vacantes'),
+            ),
+            const PopupMenuItem(
+              value: 'humanidades',
+              child: Text('Aula Virtual'),
+            ),
+          ];
+        },
+        child: Container(
+          padding: const EdgeInsets.all(5.0),
+          decoration: BoxDecoration(
+            color:
+                isHovered ? Colors.white.withOpacity(0.2) : Colors.transparent,
+          ),
+          child: const Text(
+            'ADMISION',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
   Widget _buildOficinasNavItem(BuildContext context) {
     return MouseRegion(
       onEnter: (_) => setState(() => isHovered = true),
@@ -181,10 +227,11 @@ class _UniversidadPageState extends State<UniversidadPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildUniversidadNavItem(context),
-            _buildNavItem('ADMISIÓN', context),
+            _buildAdmisionNavItem(context),
+            
             _buildPreGradoNavItem(
                 context), // Opción "PRE-GRADO" con menú desplegable
-            _buildNavItem('SERVICIOS', context),
+           _buildServiciosNavItem(context),
             _buildOficinasNavItem(context),
           ],
         ),
@@ -236,6 +283,50 @@ class _UniversidadPageState extends State<UniversidadPage> {
           ),
           child: const Text(
             'PRE-GRADO',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildServiciosNavItem(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => isHovered = true),
+      onExit: (_) => setState(() => isHovered = false),
+      child: PopupMenuButton<String>(
+        onSelected: (value) {},
+        itemBuilder: (BuildContext context) {
+          return [
+            const PopupMenuItem(
+              value: 'ingenieria',
+              child: Text('Intranet'),
+            ),
+            const PopupMenuItem(
+              value: 'medicina',
+              child: Text('Idiomas'),
+            ),
+            const PopupMenuItem(
+              value: 'arquitectura',
+              child: Text('Policlinico'),
+            ),
+            const PopupMenuItem(
+              value: 'humanidades',
+              child: Text('Biblioteca'),
+            ),
+          ];
+        },
+        child: Container(
+          padding: const EdgeInsets.all(5.0),
+          decoration: BoxDecoration(
+            color:
+                isHovered ? Colors.white.withOpacity(0.2) : Colors.transparent,
+          ),
+          child: const Text(
+            'SERVICIOS',
             style: TextStyle(
               color: Colors.white,
               fontSize: 10,

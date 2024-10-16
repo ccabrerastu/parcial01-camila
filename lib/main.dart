@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -68,7 +69,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
       _imagePath = '';
       _displayText =
           'Somos una institución de derecho privado, con personería jurídica inscrita en Registros Públicos de Tacna con la Ficha N°1217 (Partida Electrónica N° 11005803) sin fines de lucro, con autonomía académica, económica, normativa, administrativa y de gobierno, que se rige por la Constitución Política del Perú, la Ley Universitaria N° 30220, su Ley de Creación N°24060, por su Estatuto y Reglamentos y NO DEPENDE DE NINGUNA OTRA PERSONA JURÍDICA O ENTE PROMOTOR.';
-      _imagePath = '';
+      _imageLocation = '';
     });
   }
 
@@ -85,6 +86,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
     setState(() {
       _displayText = '';
       _imagePath = 'assets/images/calendario.jpg';
+      _imageLocation = '';
     });
   }
 
@@ -179,6 +181,26 @@ class _UniversidadPageState extends State<UniversidadPage> {
                         'assets/images/calendario.JPG',
                         fit: BoxFit.cover,
                         width: 400,
+                      ),
+                    ),
+                  ),
+                if (_imageLocation.isNotEmpty)
+                  Container(
+                    margin: const EdgeInsets.only(top: 16.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 1),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        launchUrl(Uri.parse(
+                            'https://maps.app.goo.gl/qtTEBHQULcwcogPj7'));
+                      },
+                      child: Center(
+                        child: Image.asset(
+                          'assets/images/download.png', 
+                          fit: BoxFit.cover,
+                          width: 400,
+                        ),
                       ),
                     ),
                   ),

@@ -28,7 +28,41 @@ class UniversidadPage extends StatefulWidget {
 
 class _UniversidadPageState extends State<UniversidadPage> {
   bool isHovered = false;
-
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+  final List<String> images = [
+    'assets/images/fondoranking.JPG',
+    'assets/images/licencia.jpg',
+    'assets/images/movilidad.jpg'
+  ];
+  void _nextPage() {
+    setState(() {
+      if (_currentPage < images.length - 1) {
+        _currentPage++;
+      } else {
+        _currentPage = 0; 
+      }
+    });
+    _pageController.animateToPage(
+      _currentPage,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeIn,
+    );
+  }
+  void _previousPage() {
+    setState(() {
+      if (_currentPage > 0) {
+        _currentPage--;
+      } else {
+        _currentPage = images.length - 1; // Va al final cuando esté en el inicio
+      }
+    });
+    _pageController.animateToPage(
+      _currentPage,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeIn,
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +75,50 @@ class _UniversidadPageState extends State<UniversidadPage> {
           ],
         ),
       ),
-      body: const Center(
-        child: Text('Contenido de la Página Principal'),
+      body: Column(
+        children: [
+          Expanded(
+            child: Stack(
+              children: [
+                PageView.builder(
+                  controller: _pageController,
+                  itemCount: images.length,
+                  itemBuilder: (context, index) {
+                    return Image.asset(
+                      images[index],
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    );
+                  },
+                ),
+                Positioned(
+                  left: 10,
+                  top: MediaQuery.of(context).size.height * 0.4,
+                  child: GestureDetector(
+                    onTap: _previousPage,
+                    child: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 10,
+                  top: MediaQuery.of(context).size.height * 0.4,
+                  child: GestureDetector(
+                    onTap: _nextPage,
+                    child: const Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -64,7 +64,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
 
   @override
   Widget build(BuildContext context) {
- return Scaffold(
+     return Scaffold(
     appBar: PreferredSize(
       preferredSize: const Size.fromHeight(150.0),
       child: Column(
@@ -76,17 +76,16 @@ class _UniversidadPageState extends State<UniversidadPage> {
     ),
     body: Column(
       children: [
-        Expanded(
+        SizedBox(
+          height: 150, 
+          width: MediaQuery.of(context).size.width * 1,
           child: Stack(
             children: [
               PageView.builder(
                 controller: _pageController,
                 itemCount: 3,
                 itemBuilder: (context, index) {
-                  return Container(
-                     width: MediaQuery.of(context).size.width * 0.5,
-                    height:250, // Ajusta esta altura según sea necesario
-                    alignment: Alignment.center, 
+                  return Center( 
                     child: Image.asset(
                       index == 0
                           ? 'assets/images/fondoranking.jpg'
@@ -101,7 +100,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
               ),
               Positioned(
                 left: 10,
-                top: MediaQuery.of(context).size.height * 0.4,
+                top: 100, 
                 child: GestureDetector(
                   onTap: _previousPage,
                   child: const Icon(
@@ -113,7 +112,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
               ),
               Positioned(
                 right: 10,
-                top: MediaQuery.of(context).size.height * 0.4,
+                top: 100, 
                 child: GestureDetector(
                   onTap: _nextPage,
                   child: const Icon(
@@ -124,6 +123,11 @@ class _UniversidadPageState extends State<UniversidadPage> {
                 ),
               ),
             ],
+          ),
+        ),
+        Expanded(
+          child: Container(
+            color: Colors.white, 
           ),
         ),
       ],
@@ -316,7 +320,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
             _buildAdmisionNavItem(context),
 
             _buildPreGradoNavItem(
-                context), // Opción "PRE-GRADO" con menú desplegable
+                context), 
             _buildServiciosNavItem(context),
             _buildOficinasNavItem(context),
           ],

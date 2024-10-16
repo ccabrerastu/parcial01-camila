@@ -30,14 +30,11 @@ class _UniversidadPageState extends State<UniversidadPage> {
   bool isHovered = false;
   final PageController _pageController = PageController();
   int _currentPage = 0;
-  final List<String> images = [
-    'assets/images/fondoranking.jpg',
-    'assets/images/licencia.jpg',
-    'assets/images/movilidad.jpg'
-  ];
+
   void _nextPage() {
     setState(() {
-      if (_currentPage < images.length - 1) {
+      if (_currentPage < 2) {
+
         _currentPage++;
       } else {
         _currentPage = 0;
@@ -55,8 +52,7 @@ class _UniversidadPageState extends State<UniversidadPage> {
       if (_currentPage > 0) {
         _currentPage--;
       } else {
-        _currentPage =
-            images.length - 1; // Va al final cuando esté en el inicio
+        _currentPage = 2; 
       }
     });
     _pageController.animateToPage(
@@ -68,62 +64,69 @@ class _UniversidadPageState extends State<UniversidadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(150.0),
-        child: Column(
-          children: [
-            _buildHeader(context),
-            _buildNavBar(context),
-          ],
-        ),
-      ),
-      body: Column(
+ return Scaffold(
+    appBar: PreferredSize(
+      preferredSize: const Size.fromHeight(150.0),
+      child: Column(
         children: [
-          Expanded(
-            child: Stack(
-              children: [
-                PageView.builder(
-                  controller: _pageController,
-                  itemCount: images.length,
-                  itemBuilder: (context, index) {
-                    return Image.asset(
-                      images[index],
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                    );
-                  },
-                ),
-                Positioned(
-                  left: 10,
-                  top: MediaQuery.of(context).size.height * 0.4,
-                  child: GestureDetector(
-                    onTap: _previousPage,
-                    child: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                      size: 50,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  right: 10,
-                  top: MediaQuery.of(context).size.height * 0.4,
-                  child: GestureDetector(
-                    onTap: _nextPage,
-                    child: const Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                      size: 50,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          _buildHeader(context),
+          _buildNavBar(context),
         ],
       ),
-    );
+    ),
+    body: Column(
+      children: [
+        Expanded(
+          child: Stack(
+            children: [
+              PageView.builder(
+                controller: _pageController,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return Container(
+                    height: 100, // Ajusta esta altura según sea necesario
+                    child: Image.asset(
+                      index == 0
+                          ? 'assets/images/fondoranking.jpg'
+                          : index == 1
+                              ? 'assets/images/licencia.jpg'
+                              : 'assets/images/movilidad.jpg',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                  );
+                },
+              ),
+              Positioned(
+                left: 10,
+                top: MediaQuery.of(context).size.height * 0.4,
+                child: GestureDetector(
+                  onTap: _previousPage,
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                    size: 30,
+                  ),
+                ),
+              ),
+              Positioned(
+                right: 10,
+                top: MediaQuery.of(context).size.height * 0.4,
+                child: GestureDetector(
+                  onTap: _nextPage,
+                  child: const Icon(
+                    Icons.arrow_forward,
+                    color: Colors.black,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
   }
 
   Widget _buildHeader(BuildContext context) {
